@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TicTacToeActivity" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sandy_beach" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <fragment
+            android:id="@+id/fragment_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            class="org.example.tictactoe.GameFragment"
+            tools:layout="@layout/fragment_game" />
+
+        <fragment
+            android:id="@+id/fragment_game_controls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            class="org.example.tictactoe.ControlFragment"
+            tools:layout="@layout/fragment_control" />
+    </LinearLayout>
+
+</FrameLayout>

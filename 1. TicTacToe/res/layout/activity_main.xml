@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    tools:context=".TicTacToeActivity" >
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        class="org.example.tictactoe.MainFragment"
+        tools:layout="@layout/fragment_main" />
+
+    <org.example.tictactoe.ScrollingView
+        android:id="@+id/main_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:scrollingDrawable="@drawable/xando_background" />
+
+</FrameLayout>
