@@ -1,28 +1,39 @@
-package com.example.browserintent;
+package com.example.browserview;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 public class MainActivity extends Activity {
-
+	private WebView webView;
 	private EditText urlText;
     private Button goButton;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // è·å–æŒ‡å‘å„ä¸ªç”¨æˆ·ç•Œé¢å…ƒç´ çš„å¥æŸ„
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		// »ñÈ¡Ö¸Ïò¸÷¸öÓÃ»§½çÃæÔªËØµÄ¾ä±ú
         urlText = (EditText) findViewById(R.id.url_field);
         goButton = (Button) findViewById(R.id.go_button);
-        // è®¾ç½®äº‹ä»¶å¤„ç†ç¨‹åº
+        webView = (WebView) findViewById(R.id.web_view);
+        // ÉèÖÃÊÂ¼ş´¦Àí³ÌĞò
         goButton.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 openBrowser();
             }
         });
-        // å¦‚æœç”¨æˆ·è¾“å…¥ç½‘å€åï¼ŒæŒ‰ä¸‹äº†è½¯é”®ç›˜ä¸­çš„â€œé“¾æ¥â€æŒ‰é’®æˆ–ç‰©ç†é”®ç›˜ä¸­çš„å›è½¦é”®ï¼Œä¹Ÿåº”è¯¥æ‰“å¼€æµè§ˆå™¨ã€‚ä¸ºæ­¤ï¼Œæˆ‘ä»¬å®šä¹‰äº†å¦ä¸€ä¸ªç›‘å¬å™¨ï¼Œå®ƒåœ¨ç”¨æˆ·åœ¨æ–‡æœ¬æ¡†ä¸­æ‰§è¡Œæ“ä½œæ—¶è¢«è°ƒç”¨ã€‚
+        // Èç¹ûÓÃ»§ÊäÈëÍøÖ·ºó£¬°´ÏÂÁËÈí¼üÅÌÖĞµÄ¡°Á´½Ó¡±°´Å¥»òÎïÀí¼üÅÌÖĞµÄ»Ø³µ¼ü£¬Ò²Ó¦¸Ã´ò¿ªä¯ÀÀÆ÷¡£Îª´Ë£¬ÎÒÃÇ¶¨ÒåÁËÁíÒ»¸ö¼àÌıÆ÷£¬ËüÔÚÓÃ»§ÔÚÎÄ±¾¿òÖĞÖ´ĞĞ²Ù×÷Ê±±»µ÷ÓÃ¡£
         urlText.setOnEditorActionListener(new OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId,
                                           KeyEvent event) {
@@ -36,12 +47,10 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-    }
-	/** æ‰“å¼€æµè§ˆå™¨å¹¶æµè§ˆåˆ°æ–‡æœ¬æ¡†ä¸­æŒ‡å®šçš„URL */
+	}
 	private void openBrowser() {
-		Uri uri = Uri.parse(urlText.getText().toString()); // ç”¨æˆ·è¾“å…¥çš„ç½‘å€è½¬æ¢ä¸ºå­—ç¬¦ä¸²ï¼ˆå¦‚http://www.android.comï¼‰ï¼Œå†å°†å…¶è½¬æ¢ä¸ºç»Ÿä¸€èµ„æºæ ‡è¯†ç¬¦ï¼ˆURIï¼‰ã€‚
-		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		startActivity(intent);
+	    webView.getSettings().setJavaScriptEnabled(true);
+	    webView.loadUrl(urlText.getText().toString());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
